@@ -1,0 +1,45 @@
+/* Shared by the toolbar popup and the pop-in. */
+:root {
+  color-scheme: light dark;
+  /* White on --accent is 5.5:1; teal-600 was 3.7:1, too low for 13px text. */
+  --accent: #0f766e; --accent-hover: #115e59; --on-accent: #fff;
+  --focus: #0f766e; --muted: #5b6370; --line: #e5e7eb; --hover: #f1f5f9; --bad: #b91c1c;
+}
+@media (prefers-color-scheme: dark) {
+  .tag, #message.done { color: var(--focus); }
+  :root { --focus: #5eead4; --muted: #a1a8b3; --line: #374151; --hover: #1f2937; --bad: #fca5a5; }
+}
+body { font: 13px/1.4 system-ui, sans-serif; width: 320px; margin: 0; padding: 10px; background: Canvas; color: CanvasText; }
+p { margin: 4px 4px 8px; overflow-wrap: anywhere; }
+#message:empty { display: none; }
+#message.error { color: var(--bad); }
+#message.done { color: var(--accent); font-weight: 600; }
+#message.done::before { content: '✓'; margin-right: 6px; }
+.site { margin: 2px 6px 6px; font-size: 12px; font-weight: 600; color: var(--muted); }
+#message.busy::before {
+  content: ''; display: inline-block; width: 10px; height: 10px; margin-right: 6px; vertical-align: -1px;
+  border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+ul { list-style: none; margin: 0; padding: 0; }
+li + li { border-top: 1px solid var(--line); }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+button:disabled { cursor: default; opacity: 0.5; }
+.entry { display: block; width: 100%; min-height: 44px; text-align: left; background: none; border: 0; padding: 6px; border-radius: 6px; transition: background-color 120ms; }
+.entry:not(:disabled):hover, .entry:focus-visible { background: var(--hover); }
+.title { display: block; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.detail { display: block; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vault { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px; }
+.vault .detail { min-width: 0; }
+.vault button, .actions button { flex: none; min-height: 28px; background: var(--accent); color: var(--on-accent); border: 0; border-radius: 6px; padding: 4px 12px; font-weight: 500; transition: background-color 120ms; }
+.vault button:not(:disabled):hover, #retry:hover { background: var(--accent-hover); }
+.actions { display: flex; gap: 8px; margin: 0 4px; }
+.actions .secondary { background: none; color: inherit; border: 1px solid var(--line); }
+.actions .secondary:hover { background: var(--hover); }
+.tag { display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 999px; font-size: 11px; font-weight: 500; color: var(--accent); border: 1px solid currentColor; vertical-align: 1px; }
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  #message.busy::before { animation-duration: 2.4s; }
+}
+[hidden] { display: none !important; }
