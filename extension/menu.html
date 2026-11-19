@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Strongbox logins</title>
+<link rel="stylesheet" href="ui.css">
+<style>
+  /* The iframe is as wide as the field (260–360px) and sized to fit; the list scrolls past 320px. */
+  body { width: auto; padding: 4px; max-height: 312px; overflow-y: auto; }
+  #show { display: flex; align-items: center; gap: 10px; }
+  #show svg { flex: none; color: var(--accent); }
+  #show .detail { font-size: 12px; }
+  @media (prefers-color-scheme: dark) { #show svg { color: var(--focus); } }
+</style>
+</head>
+<body>
+<button id="show" class="entry">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+<span><span class="title">Fill login</span><span class="detail">Strongbox</span></span>
+</button>
+<div id="list" hidden>
+<p id="site" class="site" hidden></p>
+<p id="message" role="status"></p>
+<ul id="matches" aria-label="Logins"></ul>
+<ul id="vaults" aria-label="Locked vaults"></ul>
+<div class="actions"><button id="retry" hidden>Try again</button><button id="cancel" class="secondary" hidden>Cancel</button></div>
+</div>
+<script src="menu.js"></script>
+</body>
+</html>

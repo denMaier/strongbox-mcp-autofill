@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "Strongbox MCP AutoFill",
+  "version": "0.1.0",
+  "description": "Fills logins from Strongbox through its MCP interface, only when you ask.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj/Lnz8BLVOYVnaRwhRP0STqKz2Z7B5IHrcX56sroa5vCjoEtzhOnNa0yFZSARFQUX3XY02asEvs3rbgaRoh4V+9uOL2F09R1D/a5YBRaVqvp7UXdiT2lEf2pYIEG/cLklkEpNQcKTkipHb82czx/hAEfReCmPnZUjUq5Qpp8OqsuuUzt3yQkMwRwxUWar1UcBDyMcut60SkpPsEJAh517x0NbIGbzPCVpGPs/jqWGANokkPaMBfSJrfHCU6L5TPMLeMLhDVBUal5DAWLPL3aTSSKRn89iZNymzo4hNTyuTKAPZJJtxyiWl1fQATV6s0/YchJQAX32bQuTNuYLhrAeQIDAQAB",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "nativeMessaging",
+    "scripting",
+    "storage",
+    "webNavigation"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Strongbox MCP AutoFill",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "commands": {
+    "fill-login": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L"
+      },
+      "description": "Fill the login for this page"
+    }
+  },
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["inline.js"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["menu.html", "menu.js", "ui.css"],
+      "matches": ["http://*/*", "https://*/*"],
+      "use_dynamic_url": true
+    }
+  ]
+}
